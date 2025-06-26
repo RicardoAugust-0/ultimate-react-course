@@ -66,7 +66,7 @@ const data = [
     publicationDate: "1965-01-01",
     author: "Frank Herbert",
     genres: ["science fiction", "novel", "adventure"],
-    hasMovieAdaptation: true,
+    hasMovieAdaptation: false,
     pages: 658,
     translations: {
       spanish: "",
@@ -145,7 +145,8 @@ function getBook(id) {
 
 // Desestruturando elementos
 
-const book = getBook(1);
+/*
+const book = getBook(3);
 book;
 
 // const title = book.title;
@@ -200,3 +201,127 @@ console.log(`The book has ${pagesRange} pages`);
 // Arrow Function --- Realiza o mesmo que a função padrão, porém de forma + moderna e simples (arrow function retorna automaticamente o que estiver do lado direito da seta)
 // const getYear = (str) => str.split("-")[0];
 // console.log(getYear(publicationDate));
+
+// Operador 'End' --- Curto-circuito (funciona como um "se" --- "se" o primeiro valor for verdadeiro, mostre o segundo, "se" o primeiro valor for falso, mostre o primeiro)
+console.log(true && "Some string");
+console.log(false && "Some string");
+console.log(hasMovieAdaptation && "This book has a movie");
+
+// falsy: 0, '', null, undefined
+console.log("jonas" && "Some string");
+console.log(0 && "Some String");
+
+console.log(true || "Some string");
+console.log(false || "Some string");
+
+console.log(book.translations.spanish);
+
+const spanishTranslation = book.translations.spanish || "Not Translated";
+spanishTranslation;
+
+// console.log(book.reviews.librarything.reviewsCount);
+// const countWrong = book.reviews.librarything.reviewsCount || "No Data";
+// countWrong;
+
+// // Operador Coalescência nullish --- Funciona muito parecido com o Operador "ou"( || ) mas também causa curto-circuito para valores falsos --- Apenas retorna o segundo valor se o primeiro valor for nulo ou undefined
+// const count = book.reviews.librarything.reviewsCount ?? "No data";
+// count;
+
+// Encadeamento opcional --- Apenas solicita as próximas propriedades caso o que vier antes realmente existir
+function getTotalReviewCount(book) {
+  // Se a propriedade não existir, torna toda variável undefined
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodreads + librarything;
+}
+
+console.log(getTotalReviewCount(book));
+*/
+
+/*
+function getTotalReviewCount(book) {
+  // Se a propriedade não existir, torna toda variável undefined
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodreads + librarything;
+}
+
+const books = getBooks();
+// 'Map' --- Cria um novo array com base no que foi passado nos parâmetros
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+titles;
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount(book),
+}));
+essentialData;
+
+// 'Filter' --- Chama um callback para cada elemento do array e filtra com base na regra implementada (no caso "se" book for maior que 500, então o book irá entrar para o novo array)
+const longBooksWithMovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+longBooksWithMovie;
+
+const adventureBooks = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title);
+adventureBooks;
+
+// 'Reduce' --- Tem como objetivo reduzir todo o array para apenas 1 valor (necessita de um valor temporário que no caso é o "acc", este valor irá receber as iterações de todas as páginas, no caso ele recebe todas as somas e depois retorna o valor final)
+const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
+pagesAllBooks;
+
+const arr = [3, 6, 16, 8, 4];
+const sorted = arr.slice().sort((a, b) => a - b);
+sorted;
+arr;
+
+const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
+sortedByPages;
+
+// 1) Adicionar um objeto de livro em um array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling",
+};
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+// 2) Deletar um objeto de livro de dentro de um array
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+booksAfterDelete;
+
+// 3) Atualizar um objeto de livro de dentro de um array
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 12100 } : book
+);
+booksAfterUpdate;
+*/
+
+// Criação de uma função assíncrona, utilizando 'Promises' (Javascript é síncrono por padrão)
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+// console.log("jonas");
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+
+  return data;
+}
+
+const todos = getTodos();
+console.log(todos);
+
+console.log("ricardo");
