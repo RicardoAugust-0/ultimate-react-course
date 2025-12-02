@@ -172,10 +172,15 @@ body {
   padding: 1.4rem 3.2rem;
   cursor: pointer;
   transition: all 0.2s;
+  border-radius: 50px;
 }
 
 .btn:hover {
   background-color: #e9bb24;
+}
+
+.btn:active {
+  background-color: #b28f1d;
 }
 
 /*
